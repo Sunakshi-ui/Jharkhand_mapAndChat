@@ -1,0 +1,276 @@
+.planner-page {
+  padding: 40px 0;
+  min-height: 80vh;
+}
+
+.planner-header {
+  text-align: center;
+  margin-bottom: 40px;
+}
+
+.planner-header h1 {
+  font-size: 2.5rem;
+  color: #333;
+  margin-bottom: 1rem;
+}
+
+.planner-header p {
+  font-size: 1.1rem;
+  color: #666;
+}
+
+.onboarding-summary {
+  margin-bottom: 40px;
+  background: linear-gradient(135deg, rgba(102, 126, 234, 0.1), rgba(118, 75, 162, 0.1));
+}
+
+.onboarding-summary h3 {
+  color: #333;
+  margin-bottom: 1rem;
+}
+
+.onboarding-summary p {
+  margin-bottom: 0.5rem;
+  color: #555;
+}
+
+.planner-content {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 2rem;
+  min-height: 600px;
+}
+
+.attractions-panel,
+.itinerary-panel,
+.map-panel {
+  background: white;
+  border-radius: 12px;
+  padding: 20px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.07);
+}
+
+.attractions-panel h3,
+.itinerary-panel h3,
+.map-panel h3 {
+  color: #333;
+  margin-bottom: 20px;
+  font-size: 1.25rem;
+}
+
+.attractions-list {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.attraction-card {
+  cursor: grab;
+  transition: all 0.3s ease;
+}
+
+.attraction-card:hover {
+  transform: translateY(-2px);
+}
+
+.attraction-card h4 {
+  font-size: 1.1rem;
+  color: #333;
+  margin-bottom: 0.5rem;
+}
+
+.attraction-card p {
+  color: #666;
+  font-size: 0.9rem;
+  margin: 0;
+}
+
+.attraction-description {
+  color: #555;
+  font-size: 0.9rem;
+  margin: 0.5rem 0;
+  line-height: 1.4;
+}
+
+.attraction-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.25rem;
+  margin: 0.5rem 0;
+}
+
+.attraction-tags .tag {
+  background: #e3f2fd;
+  color: #1976d2;
+  padding: 0.2rem 0.5rem;
+  border-radius: 12px;
+  font-size: 0.75rem;
+  font-weight: 500;
+}
+
+.attraction-location {
+  color: #888;
+  font-size: 0.8rem;
+  margin: 0.25rem 0;
+}
+
+.best-time {
+  color: #4caf50;
+  font-size: 0.8rem;
+  font-weight: 500;
+  margin: 0.25rem 0;
+}
+
+.day-buttons {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.25rem;
+  margin-top: 0.75rem;
+}
+
+.day-buttons .btn {
+  padding: 0.25rem 0.5rem;
+  font-size: 0.75rem;
+  border: 1px solid #ddd;
+  background: white;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.day-buttons .btn:hover {
+  background: #f0f8ff;
+  border-color: #1976d2;
+}
+
+.day-buttons .btn:disabled {
+  background: #e8f5e8;
+  color: #4caf50;
+  border-color: #4caf50;
+  cursor: not-allowed;
+}
+
+.interest-filters {
+  margin-bottom: 1.5rem;
+  padding-bottom: 1rem;
+  border-bottom: 1px solid #eee;
+}
+
+.interest-filters h4 {
+  color: #333;
+  font-size: 1rem;
+  margin-bottom: 0.75rem;
+}
+
+.filter-buttons {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+.filter-btn {
+  padding: 0.5rem 1rem;
+  font-size: 0.9rem;
+  border: 1px solid #ddd;
+  background: white;
+  border-radius: 20px;
+  cursor: pointer;
+  transition: all 0.3s;
+  color: #666;
+}
+
+.filter-btn:hover {
+  background: #f0f8ff;
+  border-color: #1976d2;
+  color: #1976d2;
+}
+
+.filter-btn.active {
+  background: #1976d2;
+  border-color: #1976d2;
+  color: white;
+  font-weight: 500;
+}
+
+.no-attractions {
+  text-align: center;
+  padding: 2rem;
+  color: #888;
+}
+
+.draggable-item {
+  background: #f8f9fa;
+  border: 1px solid #e9ecef;
+  border-radius: 6px;
+  padding: 0.75rem;
+  margin-bottom: 0.5rem;
+  cursor: grab;
+  transition: all 0.2s;
+}
+
+.draggable-item:hover {
+  background: #e3f2fd;
+  border-color: #1976d2;
+}
+
+.draggable-item:active {
+  cursor: grabbing;
+}
+
+.day-planner {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.day-card .card-header {
+  background: #f8f9fa;
+  border-bottom: 1px solid #e9ecef;
+}
+
+.day-card .card-header h4 {
+  color: #333;
+  font-size: 1.1rem;
+  margin: 0;
+}
+
+.day-card .card-body {
+  min-height: 100px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #999;
+}
+
+.map-placeholder {
+  height: 400px;
+  background: #f8f9fa;
+  border: 2px dashed #dee2e6;
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #666;
+  font-size: 1.1rem;
+}
+
+@media (max-width: 1024px) {
+  .planner-content {
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+  }
+}
+
+@media (max-width: 768px) {
+  .planner-page {
+    padding: 20px 0;
+  }
+  
+  .planner-header h1 {
+    font-size: 2rem;
+  }
+  
+  .map-placeholder {
+    height: 300px;
+  }
+}
