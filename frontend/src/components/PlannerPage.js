@@ -12,6 +12,7 @@ import L from 'leaflet';
 
 // Import the single placeholder icon
 import placeholderIconUrl from '../assets/placeholder.png';
+import hotel from '../assets/hotel.png';
 
 // Backend API configuration
 const BACKEND_URL = process.env.REACT_APP_BACKEND_URL;
@@ -20,6 +21,12 @@ const API = `${BACKEND_URL}/api`;
 // Custom icon setup for all markers
 const customIcon = L.icon({
   iconUrl: placeholderIconUrl,
+  iconSize: [35, 35],
+  iconAnchor: [17, 35],
+  popupAnchor: [0, -35],
+});
+const hotelIcon = L.icon({
+  iconUrl: hotel,
   iconSize: [35, 35],
   iconAnchor: [17, 35],
   popupAnchor: [0, -35],
@@ -162,6 +169,16 @@ const PlannerPage = () => {
     }
   };
 
+  const [hotels, setHotels] = useState([]);
+
+useEffect(() => {
+  fetch(`${API}/hotels`)
+    .then(res => res.json())
+    .then(data => setHotels(data));
+}, []);
+
+
+const dayColors = ["blue", "green", "red", "orange", "purple", "teal"];
   return (
     <div className="planner-page">
       <div className="container">
@@ -285,7 +302,9 @@ const PlannerPage = () => {
           <div className="map-panel">
             <h3>Map View</h3>
             <div className='leaflet-container'>
-              <MapContainer center={[23.628716, 85.554458]} zoom={8} style={{ height: "600px", width: "100%" }}>
+              <MapContainer center={[24.481445, 86.697462]} zoom={8} style={{ height: "600px", width: "100%" }}>
+
+
                 <TileLayer
                   attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
                   url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
@@ -308,17 +327,42 @@ const PlannerPage = () => {
                   </Marker>
                 ))}
 
+                {hotels.map(hotel => (
+  <Marker
+    key={hotel.id}
+    position={[hotel.coordinates.lat, hotel.coordinates.lng]}
+    icon={hotelIcon} // define a distinct icon for hotels
+  >
+    <Popup>
+      <div>
+        <h4>{hotel.name}</h4>
+        <p><strong>City:</strong> {hotel.city}</p>
+        <p><strong>Rooms:</strong> {hotel.rooms}</p>
+        <p><strong>Contact:</strong> {hotel.contact}</p>
+        <p><strong>Price:</strong> {hotel.price_range}</p>
+        <p><strong>Amenities:</strong> {hotel.amenities.join(', ')}</p>
+      </div>
+    </Popup>
+  </Marker>
+))}
+
                 {/* Draw polylines for each day's itinerary */}
-                {Object.keys(itinerary).map(day => {
-                  const locations = itinerary[day];
-                  if (locations.length > 1) {
-                    const positions = locations.map(loc => [loc.coordinates.lat, loc.coordinates.lng]);
-                    return (
-                      <Polyline key={day} positions={positions} color="blue" weight={5} />
-                    );
-                  }
-                  return null;
-                })}
+                {Object.keys(itinerary).map((day, index) => {
+  const locations = itinerary[day];
+  if (locations.length > 1) {
+    const positions = locations.map(loc => [loc.coordinates.lat, loc.coordinates.lng]);
+    return (
+      <Polyline
+        key={day}
+        positions={positions}
+        color={dayColors[index % dayColors.length]}
+        weight={5}
+      />
+    );
+  }
+  return null;
+})}
+
               </MapContainer>
             </div>
           </div>

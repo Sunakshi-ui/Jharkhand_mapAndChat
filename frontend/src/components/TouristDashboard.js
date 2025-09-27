@@ -4,6 +4,13 @@ import { Calendar, Map, Users, Camera, AlertTriangle, Phone, Star, BookOpen } fr
 import axios from 'axios';
 import 'leaflet/dist/leaflet.css';
 import OnboardingPage from './OnboardingPage';
+import placeholderIconUrl from '../assets/placeholder.png';
+const customIcon = L.icon({
+  iconUrl: placeholderIconUrl,
+  iconSize: [35, 35],
+  iconAnchor: [17, 35],
+  popupAnchor: [0, -35],
+});
 
 const BACKEND_URL = process.env.REACT_APP_BACKEND_URL;
 const API = `${BACKEND_URL}/api`;
@@ -198,8 +205,8 @@ const renderMap = () => { return(
       </h3>
       <div className="map-container">
         <MapContainer 
-          center={[23.3441, 85.3096]} 
-          zoom={10} 
+          center={[24.481445, 86.697462]} 
+          zoom={7} 
           style={{ height: '100%', width: '100%' }}
         >
           <TileLayer
@@ -210,6 +217,7 @@ const renderMap = () => { return(
             <Marker 
               key={attraction.id} 
               position={[attraction.coordinates.lat, attraction.coordinates.lng]}
+              icon={customIcon}
             >
               <Popup>
                 <div>
@@ -255,48 +263,6 @@ const renderMap = () => { return(
 };
 <button onClick={() => setShowOnboarding(false)}>Back to Dashboard</button>
 
-    
-  //   <div className="dashboard-card">
-  //     <h3 className="card-title">
-  //       <Calendar className="card-icon" />
-  //       {t.tabs.itinerary}
-  //     </h3>
-  //     <div className="space-y-4">
-  //       <div className="form-group">
-  //         <label className="form-label">Destination</label>
-  //         <input 
-  //           type="text" 
-  //           className="form-input" 
-  //           placeholder={t.placeholders.destination}
-  //         />
-  //       </div>
-  //       <div className="grid grid-cols-2 gap-4">
-  //         <div className="form-group">
-  //           <label className="form-label">Start Date</label>
-  //           <input type="date" className="form-input" />
-  //         </div>
-  //         <div className="form-group">
-  //           <label className="form-label">End Date</label>
-  //           <input type="date" className="form-input" />
-  //         </div>
-  //       </div>
-  //       <div className="form-group">
-  //         <label className="form-label">Interests</label>
-  //         <div className="flex flex-wrap gap-2">
-  //           {['Waterfalls', 'Tribal Culture', 'Adventure', 'Nature', 'Photography'].map(interest => (
-  //             <button key={interest} className="px-3 py-1 bg-blue-100 text-blue-800 rounded-lg text-sm">
-  //               {interest}
-  //             </button>
-  //           ))}
-  //         </div>
-  //       </div>
-  //       <button className="btn w-full">Generate Itinerary</button>
-  //     </div>
-  //   </div>
-  // );
-
-  
-  
 
   const renderBookings = () => (
     <div className="dashboard-card">

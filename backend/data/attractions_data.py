@@ -98,7 +98,21 @@ ATTRACTIONS_DATA = {
             "best_time": "Year round",
             "duration": "2-3 hours",
             "image": "pahari_mandir.jpg"
-        }
+        },
+                {
+  "id": "ranchi_009",
+  "name": "Hathidari Underground Coal Mine",
+  "city": "Ranchi",
+  "coordinates": {"lat": 23.651219, "lng": 85.358799},
+  "type": "tour",
+  "interest_tags": ["Spirituality", "Nature", "Exploration"],
+  "description": "A one-day guided mining tour blending spiritual insights with Ranchi’s lush landscapes and waterfalls.",
+  "best_time": "October to March",
+  "duration": "1 Day",
+  "group_size": "20-25 Guests",
+  "price": "₹2800/person",
+  "image": "religious_mining_tour.jpg"
+},
     ],
     "Jamshedpur": [
         {

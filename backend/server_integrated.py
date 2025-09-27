@@ -20,6 +20,7 @@ import seaborn as sns
 
 # Import attractions data
 from data.attractions_data import get_all_attractions, get_attractions_by_city, get_attractions_by_interest, get_attraction_by_id
+from data.hotels_data import get_all_hotels, get_hotels_by_city, get_hotel_by_id
 
 ROOT_DIR = Path(__file__).parent
 load_dotenv(ROOT_DIR / '.env')
@@ -121,6 +122,16 @@ class Attraction(BaseModel):
     duration: str
     image: str
 
+class Hotel(BaseModel):
+    id: str
+    name: str
+    city: str
+    coordinates: Dict[str, float]
+    rooms: int
+    contact: str
+    amenities: List[str]
+    price_range: str
+
 # Helper function for sentiment analysis
 def analyze_sentiment(text: str) -> Dict[str, Any]:
     """Simple sentiment analysis using keywords"""
@@ -174,6 +185,8 @@ MOCK_VENDORS = [
 async def root():
     return {"message": "Jharkhand Tourism Platform API", "version": "1.0"}
 
+
+
 # Attractions/Tourist Spots endpoints
 @api_router.get("/attractions", response_model=List[Attraction])
 async def get_attractions(city: Optional[str] = None, interest: Optional[str] = None):
@@ -216,6 +229,23 @@ async def get_tourist_spots():
         )
         spots.append(spot)
     return spots
+
+@api_router.get("/hotels", response_model=List[Hotel])
+async def get_hotels(city: Optional[str] = None):
+    """Get all hotels or filter by city"""
+    if city:
+        hotels = get_hotels_by_city(city)
+    else:
+        hotels = get_all_hotels()
+    return [Hotel(**hotel) for hotel in hotels]
+
+@api_router.get("/hotels/{hotel_id}", response_model=Hotel)
+async def get_hotel(hotel_id: str):
+    """Get specific hotel by ID"""
+    hotel = get_hotel_by_id(hotel_id)
+    if not hotel:
+        raise HTTPException(status_code=404, detail="Hotel not found")
+    return Hotel(**hotel)
 
 # Vendor Management
 @api_router.post("/vendors", response_model=VendorRegistration)
