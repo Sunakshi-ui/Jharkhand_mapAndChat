@@ -64,8 +64,6 @@ A full-stack web application for exploring tourist attractions, planning itinera
 
 ## Environment Variables
 - `GEMINI_API_KEY`: Google Generative AI API key
-- `MONGO_URL`: MongoDB connection string (if using MongoDB)
-- `DB_NAME`: Database name
 
 ## Project Structure
 ```
